@@ -5,7 +5,6 @@ defmodule Day2 do
       |> String.trim()
       |> String.split(",")
       |> Enum.map(&String.to_integer/1)
-      |> Enum.to_list()
 
     for i1 <- 0..99, i2 <- 0..99 do
       case attempt(nums, i1, i2) do

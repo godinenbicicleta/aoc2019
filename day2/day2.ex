@@ -5,7 +5,6 @@ defmodule Day2 do
       |> String.trim()
       |> String.split(",")
       |> Enum.map(&String.to_integer/1)
-      |> Enum.to_list()
 
     process({:ok, nums, 0})
     |> IO.inspect()
@@ -42,5 +41,5 @@ defmodule Day2 do
   end
 end
 
-# Day2.test()
+Day2.test()
 Day2.read()
