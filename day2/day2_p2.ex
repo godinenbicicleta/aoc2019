@@ -9,10 +9,12 @@ defmodule Day2 do
 
     for i1 <- 0..99, i2 <- 0..99 do
       case attempt(nums, i1, i2) do
-        [19_690_720 | _] -> 
+        [19_690_720 | _] ->
           IO.inspect(100 * i1 + i2)
           System.halt(0)
-        _ -> nil
+
+        _ ->
+          nil
       end
     end
   end
