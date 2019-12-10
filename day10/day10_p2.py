@@ -22,7 +22,6 @@ data = """###..#########.#####.
 ..#.####.############
 ..##...###..#########"""
 
-
 coords = [[j for j in i] for i in data.split("\n") ]
 
 
@@ -40,20 +39,20 @@ def gangle(a, b):
         return 0
     if y2-y1 == 0 and x2<x1:
         return 180
-    if x2-x1 == 0 and y2> y1:
+    if x2-x1 == 0 and y2 < y1:
         return 90
-    if x2-x1 == 0 and y1> y2: 
+    if x2-x1 == 0 and y1 < y2: 
         return 270
 
     p = abs((y2-y1)/(x2-x1))
 
-    if x2>x1 and y2 > y1:
-        return math.degrees(math.atan(p))
     if x2>x1 and y2 < y1:
+        return math.degrees(math.atan(p))
+    if x2>x1 and y2 > y1:
         return 360-math.degrees(math.atan(p))
-    if x2 < x1 and y2 < y1:
-        return 180 + math.degrees(math.atan(p))
     if x2 < x1 and y2 > y1:
+        return 180 + math.degrees(math.atan(p))
+    if x2 < x1 and y2 < y1:
         return 180-math.degrees(math.atan(p))
 
 
@@ -86,10 +85,6 @@ for pos in diccionario:
         best_len = len(diccionario[pos])
         best_pos = pos
 
-print(best_pos)
-
-print(diccionario[best_pos])
-print(best_len)
 
 def add(angle):
     if angle >= 0 and angle <= 90*1000:
@@ -102,13 +97,17 @@ best_angles = [(a, add(a)) for a in diccionario[best_pos]]
 best_angles = sorted(best_angles, key = lambda x:x[1], reverse = True)
 
 pops = 0
-while len(diccionario[best_pos])> 0:
+
+print(best_pos)
+while True:
     for num,(angle, _) in enumerate(best_angles):
         try:
             poped = diccionario[best_pos][angle].pop()
             pops += 1
-            if pops == 200:
-                print(poped)
+            print("pos: ", pops,"poped: ",poped, "angle: ",angle)
 
         except:
             continue
+    if all([len(v) == 0 for v in diccionario[best_pos].values()]):
+        break
+
