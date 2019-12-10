@@ -101,10 +101,14 @@ best_angles = [(a, add(a)) for a in diccionario[best_pos]]
 
 best_angles = sorted(best_angles, key = lambda x:x[1], reverse = True)
 
+pops = 0
 while len(diccionario[best_pos])> 0:
     for num,(angle, _) in enumerate(best_angles):
-        poped = diccionario[best_pos][angle].pop()
-        if num == 199:
-            print(poped)
-            
+        try:
+            poped = diccionario[best_pos][angle].pop()
+            pops += 1
+            if pops == 200:
+                print(poped)
 
+        except:
+            continue
